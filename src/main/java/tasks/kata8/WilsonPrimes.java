@@ -1,16 +1,18 @@
 package tasks.kata8;
 
-import java.util.stream.Stream;
+import java.math.BigInteger;
+import java.util.stream.LongStream;
 
 public class WilsonPrimes {
     public static boolean am_i_wilson(double n) {
-        return (factorial(n - 1) + 1) / Math.pow(n, 2) % 1 == 0;
-    }
-
-    public static double factorial(double n) {
-        if (n <= 2) {
-            return n;
+        int p = (int) n;
+        if (p <= 1) {
+            return false;
         }
-        return n * factorial(n - 1);
+        BigInteger factorial = LongStream.rangeClosed(2, p - 1)
+                .mapToObj(BigInteger::valueOf)
+                .reduce(BigInteger.ONE, BigInteger::multiply);
+        BigInteger mod = factorial.add(BigInteger.ONE).mod(BigInteger.valueOf(p).pow(2));
+        return mod.equals(BigInteger.ZERO);
     }
 }
