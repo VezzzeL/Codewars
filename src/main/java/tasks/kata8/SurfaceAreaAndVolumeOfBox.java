@@ -1,0 +1,8 @@
+package tasks.kata8;
+
+//Write a function that returns the total surface area and volume of a box as an array: [area, volume]
+public class SurfaceAreaAndVolumeOfBox {
+    public static int[] getSize(int w, int h, int d) {
+        return new int[]{2 * (w * h + h * d + d * w), w * h * d};
+    }
+}
